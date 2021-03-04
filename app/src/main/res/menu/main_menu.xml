@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/navhome"
+            android:icon="@drawable/bechde"
+            android:title="Home" />
+
+        <item
+            android:id="@+id/navappointments"
+            android:icon="@drawable/bechde"
+            android:title="Appointments" />
+        <item
+            android:id="@+id/navdoctors"
+            android:icon="@drawable/bechde"
+            android:title="Doctors" />
+
+        <item
+            android:id="@+id/navmedicalrecords"
+            android:icon="@drawable/bechde1"
+            android:title="Medical Reports"></item>
+        <item
+            android:id="@+id/navquerys"
+            android:icon="@drawable/bechde"
+            android:title="My Querys"></item></group>
+    <group android:checkableBehavior="single">
+        <item
+            android:title="Profile">
+        <menu>
+            <item
+                android:id="@+id/navaccount"
+                android:icon="@drawable/bechde1"
+                android:title="Account" />
+            <item
+                android:id="@+id/navlogout"
+                android:icon="@drawable/gradient1"
+                android:title="Logout"></item>
+
+        </menu>
+        </item>
+    </group>
+
+</menu>

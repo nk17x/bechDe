@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1053239516545",
+    "project_id": "bechde-a6a23",
+    "storage_bucket": "bechde-a6a23.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053239516545:android:af8191859a2b5c565c1c80",
+        "android_client_info": {
+          "package_name": "com.example.bechde"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053239516545-tmls5iltpambgkkdot3oon11g5kfsv4k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bechde",
+            "certificate_hash": "6edbd09b8cf2446ec46279cd3ed4e9e8e77ab38f"
+          }
+        },
+        {
+          "client_id": "1053239516545-2t0jm33h3qjterdvomndrr50s8g54qoq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC47ArgB-EqXGiTcAyNX0i_HLVyZeK0KQA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1053239516545-2t0jm33h3qjterdvomndrr50s8g54qoq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
