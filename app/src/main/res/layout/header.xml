@@ -4,29 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E95C6BC0">
+    android:background="#42b9a1">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:background="#E95C6BC0"
+        android:background="#42b9a1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imageView23"
-            android:layout_width="133dp"
-            android:layout_height="91dp"
-            android:layout_marginTop="8dp"
-            android:paddingLeft="50dp"
-            android:paddingBottom="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/bechde" />
 
         <TextView
             android:id="@+id/textView35"
@@ -34,7 +23,7 @@
             android:layout_height="28dp"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/baloo"
-            android:text="Your OneStop For Health Solutions"
+            android:text="Selling was never this easy"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +36,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="28dp"
             android:fontFamily="@font/baloo"
-            android:text="Clinic Finder"
+            android:text="BechDe"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
