@@ -26,9 +26,9 @@ Context context;
 
     @Override
     protected void onBindViewHolder(@NonNull PostViewHolder holder, int position, @NonNull mainpost model) {
-        holder.price.setText(model.getPrice());
+        holder.price.setText("Rs."+model.getPrice());
         holder.desc.setText(model.getDesc());
-        holder.location.setText(model.getLocation());
+        holder.location.setText(model.getLocation().toUpperCase());
         Picasso.get().load(model.getImgurl()).into(holder.adimage);
     }
 

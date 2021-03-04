@@ -36,11 +36,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getWindow().setNavigationBarColor(getResources().getColor(R.color.colorAccent2));
+        getWindow().setStatusBarColor(getResources().getColor(R.color.colorAccent3));
         mAuth=FirebaseAuth.getInstance();
         drawerLayout=findViewById(R.id.drawer_layout);
         toolbar=findViewById(R.id.toolbar);
         navigationView=findViewById(R.id.nav_view);
-        toolbar.setTitle("bechde");
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
