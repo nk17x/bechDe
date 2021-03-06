@@ -27,6 +27,7 @@ Context context;
     @Override
     protected void onBindViewHolder(@NonNull PostViewHolder holder, int position, @NonNull mainpost model) {
         holder.price.setText("Rs."+model.getPrice());
+        holder.adtitle.setText(model.getAdtitle());
         holder.desc.setText(model.getDesc());
         holder.location.setText(model.getLocation().toUpperCase());
         Picasso.get().load(model.getImgurl()).into(holder.adimage);
@@ -42,12 +43,13 @@ Context context;
     }
 
     public class PostViewHolder extends RecyclerView.ViewHolder {
-        TextView price,desc,location;
+        TextView price,desc,location,adtitle;
         ImageView adimage;
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
             price=itemView.findViewById(R.id.price);
             desc=itemView.findViewById(R.id.desc);
+            adtitle=itemView.findViewById(R.id.adtitle);
             location=itemView.findViewById(R.id.location);
             adimage=itemView.findViewById(R.id.adimage);
             itemView.setOnClickListener(new View.OnClickListener() {

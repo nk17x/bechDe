@@ -6,10 +6,10 @@
         android:allowBackup="true"
         android:icon="@drawable/bechde"
         android:label="@string/app_name"
-
-    android:roundIcon="@mipmap/bechde"
+        android:roundIcon="@mipmap/bechde"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".newad"></activity>
         <activity android:name=".splashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,10 +17,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".registration">
-        </activity>
+        <activity android:name=".registration"></activity>
         <activity android:name=".login" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

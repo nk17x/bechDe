@@ -1,20 +1,14 @@
 package com.example.bechde;
 
-public class mainpost {
-    String adtitle;
-    String price;
-    String desc;
-    String location;
-    String howold;
-    String category;
-    String imgurl;
+public class adhelperclass {
+    String adtitle,price,desc,location,howold,category,imgurl;
 
-    public mainpost() {
+    public adhelperclass() {
     }
 
     @Override
     public String toString() {
-        return "mainpost{" +
+        return "adhelperclass{" +
                 "adtitle='" + adtitle + '\'' +
                 ", price='" + price + '\'' +
                 ", desc='" + desc + '\'' +
@@ -81,9 +75,7 @@ public class mainpost {
         this.imgurl = imgurl;
     }
 
-
-
-    public mainpost(String adtitle, String price, String desc, String location, String howold, String category, String imgurl) {
+    public adhelperclass(String adtitle, String price, String desc, String location, String howold, String category, String imgurl) {
         this.adtitle = adtitle;
         this.price = price;
         this.desc = desc;

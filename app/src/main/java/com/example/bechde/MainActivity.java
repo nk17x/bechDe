@@ -16,12 +16,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.PhoneAuthOptions;
-import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,12 +33,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
     FirebaseAuth mAuth;
     Context context;
+    ImageButton homebutton,chatbutton,adbutton,newadbutton,accountbutton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().setNavigationBarColor(getResources().getColor(R.color.colorAccent2));
         getWindow().setStatusBarColor(getResources().getColor(R.color.colorAccent3));
+
+        homebutton=findViewById(R.id.homebutton);
+        chatbutton=findViewById(R.id.chatbutton);
+        accountbutton=findViewById(R.id.accountbutton);
+        adbutton=findViewById(R.id.adbutton);
+        newadbutton=findViewById(R.id.newadbutton);
         mAuth=FirebaseAuth.getInstance();
         drawerLayout=findViewById(R.id.drawer_layout);
         toolbar=findViewById(R.id.toolbar);
@@ -60,6 +68,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         adapter=new MainPostAdapter(options,this);
         recyclermain.setAdapter(adapter);
+
+        newadbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i2 =new Intent(MainActivity.this,newad.class);
+                startActivity(i2);
+                finish();
+            }
+        });
+
+        adbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "new ad pressed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        chatbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "new ad pressed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        accountbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "new ad pressed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        homebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "new ad pressed", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     @Override
     protected void onStart() {

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="900dp"
     android:layout_margin="4dp"
     android:layout_marginTop="0dp"
     android:background="@drawable/shape2">
@@ -36,6 +36,20 @@
             app:layout_constraintTop_toBottomOf="@+id/adimage" />
 
         <TextView
+            android:id="@+id/adtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="ad title"
+            android:textAlignment="textStart"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/price" />
+
+        <TextView
             android:id="@+id/desc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -44,14 +58,16 @@
             android:text="very good app,built with google"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/price" />
+            app:layout_constraintTop_toBottomOf="@+id/adtitle" />
 
         <TextView
             android:id="@+id/location"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
+            android:layout_marginBottom="635dp"
             android:text="andheri east"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
