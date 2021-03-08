@@ -60,14 +60,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         recyclermain=findViewById(R.id.recyclermain);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,2,LinearLayoutManager.VERTICAL,false);
         recyclermain.setLayoutManager(mLayoutManager);
+        String userId=mAuth.getUid();
         /*recyclermain.setLayoutManager(new LinearLayoutManager(this));*/
-        FirebaseRecyclerOptions<mainpost> options =
-                new FirebaseRecyclerOptions.Builder<mainpost>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("ad"), mainpost.class)
-                        .build();
 
-        adapter=new MainPostAdapter(options,this);
-        recyclermain.setAdapter(adapter);
+            FirebaseRecyclerOptions<mainpost> options =
+                    new FirebaseRecyclerOptions.Builder<mainpost>()
+                            .setQuery(FirebaseDatabase.getInstance().getReference().child("ad"), mainpost.class)
+                            .build();
+
+            adapter=new MainPostAdapter(options,this);
+            recyclermain.setAdapter(adapter);
+
+
 
         newadbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +85,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         adbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "new ad pressed", Toast.LENGTH_SHORT).show();
+                Intent i2 =new Intent(MainActivity.this,myad.class);
+                startActivity(i2);
+                finish();
             }
         });
 
@@ -102,7 +108,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         homebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "new ad pressed", Toast.LENGTH_SHORT).show();
+                Intent i2 =new Intent(MainActivity.this,MainActivity.class);
+                startActivity(i2);
+                finish();
             }
         });
     }

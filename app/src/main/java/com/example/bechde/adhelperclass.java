@@ -1,10 +1,7 @@
 package com.example.bechde;
 
 public class adhelperclass {
-    String adtitle,price,desc,location,howold,category,imgurl;
-
-    public adhelperclass() {
-    }
+    String adtitle,price,desc,location,howold,category,imgurl,userId;
 
     @Override
     public String toString() {
@@ -16,6 +13,7 @@ public class adhelperclass {
                 ", howold='" + howold + '\'' +
                 ", category='" + category + '\'' +
                 ", imgurl='" + imgurl + '\'' +
+                ", userId='" + userId + '\'' +
                 '}';
     }
 
@@ -75,7 +73,15 @@ public class adhelperclass {
         this.imgurl = imgurl;
     }
 
-    public adhelperclass(String adtitle, String price, String desc, String location, String howold, String category, String imgurl) {
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public adhelperclass(String adtitle, String price, String desc, String location, String howold, String category, String imgurl, String userId) {
         this.adtitle = adtitle;
         this.price = price;
         this.desc = desc;
@@ -83,5 +89,9 @@ public class adhelperclass {
         this.howold = howold;
         this.category = category;
         this.imgurl = imgurl;
+        this.userId = userId;
+    }
+
+    public adhelperclass() {
     }
 }

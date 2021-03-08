@@ -1,7 +1,6 @@
 package com.example.bechde;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,14 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.FirebaseApp;
 import com.squareup.picasso.Picasso;
 
-public class MainPostAdapter extends FirebaseRecyclerAdapter<mainpost,MainPostAdapter.PostViewHolder> {
-Context context;
-    public MainPostAdapter(@NonNull FirebaseRecyclerOptions<mainpost> options, MainActivity mainActivity) {
+public class MyAdPostAdapter extends FirebaseRecyclerAdapter<mainpost,MyAdPostAdapter.PostViewHolder> {
+    Context context;
+    public MyAdPostAdapter(@NonNull FirebaseRecyclerOptions<mainpost> options,myad myad) {
         super(options);
-        this.context=mainActivity;
+        this.context=myad;
     }
 
     @Override
@@ -61,8 +59,11 @@ Context context;
                     intent.putExtra("selectedDoctor",selected);
                     intent.putExtra("speciality","doctors/Gastrology");
                     context.startActivity(intent);*/
+
                     Toast.makeText(context, "ad pressed", Toast.LENGTH_SHORT).show();
 
+                }
+            });
         }
-    });}}
+    }
 }

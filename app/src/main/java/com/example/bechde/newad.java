@@ -2,9 +2,14 @@ package com.example.bechde;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -41,7 +47,7 @@ public class newad extends AppCompatActivity implements AdapterView.OnItemSelect
     Button button10, button12;
     ProgressBar progressBar;
     ImageView imageView;
-    String adtitle,price,desc,location,howold,category,imgurl;
+    String adtitle,price,desc,location,howold,category,imgurl,userId;
     String username;
     FirebaseAuth mAuth;
     FirebaseDatabase rootNode;
@@ -50,11 +56,31 @@ public class newad extends AppCompatActivity implements AdapterView.OnItemSelect
     adhelperclass helperclass;
     private static final int PICK_IMAGE_REQUEST = 1;
     Uri mImageURi;
+    ImageButton homebutton,chatbutton,adbutton,newadbutton,accountbutton;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newad);
         mAuth = FirebaseAuth.getInstance();
+        getWindow().setStatusBarColor(getResources().getColor(R.color.colorAccent3));
+        toolbar=findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i2 =new Intent(newad.this,MainActivity.class);
+                startActivity(i2);
+                finish();
+            }
+        });
+
+        homebutton=findViewById(R.id.homebutton);
+        chatbutton=findViewById(R.id.chatbutton);
+        accountbutton=findViewById(R.id.accountbutton);
+        adbutton=findViewById(R.id.adbutton);
+        newadbutton=findViewById(R.id.newadbutton);
 
         textView44 = findViewById(R.id.textView44);
         adtitletext=findViewById(R.id.adtitletext);
@@ -135,6 +161,47 @@ public class newad extends AppCompatActivity implements AdapterView.OnItemSelect
                 openFileChooser();
             }
         });
+
+        newadbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i2 =new Intent(newad.this,newad.class);
+                startActivity(i2);
+                finish();
+            }
+        });
+
+        adbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i2 =new Intent(newad.this,myad.class);
+                startActivity(i2);
+                finish();
+            }
+        });
+
+        chatbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(newad.this, "new ad pressed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        accountbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(newad.this, "new ad pressed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        homebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i2 =new Intent(newad.this,MainActivity.class);
+                startActivity(i2);
+                finish();
+            }
+        });
     }
 
     private void openFileChooser() {
@@ -159,14 +226,14 @@ public class newad extends AppCompatActivity implements AdapterView.OnItemSelect
                     fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
+                            userId=mAuth.getUid();
                             String imgurl = uri.toString();
-                            helperclass = new adhelperclass(adtitle,price,desc,location,howold,category,imgurl);
-                            databaseReference.child(username).setValue(helperclass);
+                            helperclass = new adhelperclass(adtitle,price,desc,location,howold,category,imgurl,userId);
+                            databaseReference.push().setValue(helperclass);
                         }
                     });
                     Toast.makeText(newad.this, "new ad added Succesfully", Toast.LENGTH_SHORT).show();
                     imageView.setImageResource(R.drawable.bechde);
-
                 }
 
             }).addOnFailureListener(new OnFailureListener() {
@@ -204,5 +271,12 @@ public class newad extends AppCompatActivity implements AdapterView.OnItemSelect
             mImageURi = data.getData();
             Picasso.get().load(mImageURi).into(imageView);
         }
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i2 =new Intent(newad.this,MainActivity.class);
+        startActivity(i2);
+        finish();
+
     }
 }
