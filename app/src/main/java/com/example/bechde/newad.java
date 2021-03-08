@@ -190,7 +190,9 @@ public class newad extends AppCompatActivity implements AdapterView.OnItemSelect
         accountbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(newad.this, "new ad pressed", Toast.LENGTH_SHORT).show();
+                Intent intenta=new Intent(newad.this,account.class);
+                startActivity(intenta);
+                finish();
             }
         });
 

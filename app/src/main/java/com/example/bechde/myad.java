@@ -91,7 +91,9 @@ public class myad extends AppCompatActivity {
         accountbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(myad.this, "new ad pressed", Toast.LENGTH_SHORT).show();
+                Intent intenta=new Intent(myad.this,account.class);
+                startActivity(intenta);
+                finish();
             }
         });
 

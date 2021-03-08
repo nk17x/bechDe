@@ -101,7 +101,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         accountbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "new ad pressed", Toast.LENGTH_SHORT).show();
+                Intent intenta=new Intent(MainActivity.this,account.class);
+                startActivity(intenta);
+                finish();
             }
         });
 
@@ -155,26 +157,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.navhome:
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
-            case R.id.navaccount:
-                /*Intent intentaccount=new Intent(MainActivity.this,profile.class);
-                startActivity(intentaccount);
-                break;*/
-            case R.id.navappointments:
-                /*Intent intentappointment=new Intent(MainActivity.this,appointment.class);
-                startActivity(intentappointment);
-                break;*/
-            case R.id.navdoctors:
-                /*Intent intentdoctors=new Intent(MainActivity.this,search_doctors.class);
-                startActivity(intentdoctors);
-                break;*/
-            case R.id.navmedicalrecords:
+            case R.id.navmyad:
+                Intent intent=new Intent(MainActivity.this,myad.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.navnewad:
+                Intent intentn=new Intent(MainActivity.this,newad.class);
+                startActivity(intentn);
+                finish();
+                break;
+            case R.id.navchats:
                /* Intent intentmedicalrecords=new Intent(MainActivity.this,lab_reports.class);
                 startActivity(intentmedicalrecords);
                 break;*/
-            case R.id.navquerys:
-               /* Intent intentquerys=new Intent(MainActivity.this,query.class);
-                startActivity(intentquerys);
-                break;*/
+            case R.id.navaccount:
+                Intent intenta=new Intent(MainActivity.this,account.class);
+                startActivity(intenta);
+                finish();
+                break;
         }
         return true;
     }

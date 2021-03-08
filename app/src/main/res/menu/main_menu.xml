@@ -8,37 +8,26 @@
             android:title="Home" />
 
         <item
-            android:id="@+id/navappointments"
+            android:id="@+id/navmyad"
             android:icon="@drawable/bechde"
-            android:title="Appointments" />
+            android:title="My Ad" />
         <item
-            android:id="@+id/navdoctors"
+            android:id="@+id/navnewad"
             android:icon="@drawable/bechde"
-            android:title="Doctors" />
+            android:title="New Ad" />
 
         <item
-            android:id="@+id/navmedicalrecords"
+            android:id="@+id/navchats"
             android:icon="@drawable/bechde1"
-            android:title="Medical Reports"></item>
+            android:title="Chats"></item>
         <item
-            android:id="@+id/navquerys"
+            android:id="@+id/navaccount"
             android:icon="@drawable/bechde"
-            android:title="My Querys"></item></group>
-    <group android:checkableBehavior="single">
+            android:title="Account"></item>
         <item
-            android:title="Profile">
-        <menu>
-            <item
-                android:id="@+id/navaccount"
-                android:icon="@drawable/bechde1"
-                android:title="Account" />
-            <item
-                android:id="@+id/navlogout"
-                android:icon="@drawable/gradient1"
-                android:title="Logout"></item>
-
-        </menu>
-        </item>
+            android:id="@+id/navlogout"
+            android:icon="@drawable/bechde"
+            android:title="Logout"/>
     </group>
 
 </menu>

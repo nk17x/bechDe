@@ -84,7 +84,7 @@ public class registration extends AppCompatActivity {
                     String [] twoStringArray2= str.split("@",2);
                     username= twoStringArray2[0];}
                 databaseReference=rootNode.getReference("users");
-                helperClass= new UserHelperClass(fullname,phone,email,username);
+                helperClass= new UserHelperClass(fullname,phone,email,username,"hello");
                 if(registerstatus){
                     mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
