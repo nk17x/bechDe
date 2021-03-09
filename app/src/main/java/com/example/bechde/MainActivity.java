@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().setNavigationBarColor(getResources().getColor(R.color.colorAccent2));
-        getWindow().setStatusBarColor(getResources().getColor(R.color.colorAccent3));
+        getWindow().setStatusBarColor(getResources().getColor(R.color.colorAccent5));
 
         homebutton=findViewById(R.id.homebutton);
         chatbutton=findViewById(R.id.chatbutton);

@@ -63,7 +63,7 @@ public class newad extends AppCompatActivity implements AdapterView.OnItemSelect
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newad);
         mAuth = FirebaseAuth.getInstance();
-        getWindow().setStatusBarColor(getResources().getColor(R.color.colorAccent3));
+        getWindow().setStatusBarColor(getResources().getColor(R.color.colorAccent5));
         toolbar=findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);

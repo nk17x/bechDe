@@ -30,7 +30,7 @@ public class myad extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myad);
         getWindow().setNavigationBarColor(getResources().getColor(R.color.colorAccent2));
-        getWindow().setStatusBarColor(getResources().getColor(R.color.colorAccent3));
+        getWindow().setStatusBarColor(getResources().getColor(R.color.colorAccent5));
         homebutton=findViewById(R.id.homebutton);
         chatbutton=findViewById(R.id.chatbutton);
         accountbutton=findViewById(R.id.accountbutton);
