@@ -11,8 +11,10 @@ import androidx.core.view.GravityCompat;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
@@ -37,6 +39,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +48,8 @@ public class newad extends AppCompatActivity implements AdapterView.OnItemSelect
     Spinner howoldspinner, categoryspinner;
     EditText adtitletext,desctext,pricetext,locationtext;
     TextView textView44;
-    Button button10, button12;
+    Button button10;
+    byte[] fileInBytes;
     ProgressBar progressBar;
     ImageView imageView;
     String adtitle,price,desc,location,howold,category,imgurl,userId;
@@ -90,7 +95,7 @@ public class newad extends AppCompatActivity implements AdapterView.OnItemSelect
         howoldspinner=findViewById(R.id.howoldspinner);
         locationtext=findViewById(R.id.locationtext);
         button10 = findViewById(R.id.button10);
-        button12 = findViewById(R.id.button12);
+
         progressBar = findViewById(R.id.progressBar);
         imageView = findViewById(R.id.imageView4);
         List<CharSequence> choices = new ArrayList<>();
@@ -129,7 +134,12 @@ public class newad extends AppCompatActivity implements AdapterView.OnItemSelect
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         howoldspinner.setAdapter(adapter2);
         howoldspinner.setOnItemSelectedListener(this);
-
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFileChooser();
+            }
+        });
         button10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,12 +165,6 @@ public class newad extends AppCompatActivity implements AdapterView.OnItemSelect
             }
         });
 
-        button12.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openFileChooser();
-            }
-        });
 
         newadbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -222,7 +226,7 @@ public class newad extends AppCompatActivity implements AdapterView.OnItemSelect
 
         if (mImageURi != null) {
             final StorageReference fileReference = storageReference.child(username+category+howold + "." + getFileExtension(mImageURi));
-            fileReference.putFile(mImageURi).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            fileReference.putBytes(fileInBytes).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -236,6 +240,8 @@ public class newad extends AppCompatActivity implements AdapterView.OnItemSelect
                     });
                     Toast.makeText(newad.this, "new ad added Succesfully", Toast.LENGTH_SHORT).show();
                     imageView.setImageResource(R.drawable.bechde);
+                    Intent intent=new Intent(newad.this,MainActivity.class);
+                    startActivity(intent);
                 }
 
             }).addOnFailureListener(new OnFailureListener() {
@@ -271,6 +277,17 @@ public class newad extends AppCompatActivity implements AdapterView.OnItemSelect
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             mImageURi = data.getData();
+            Bitmap bmp = null;
+            try {
+                bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), mImageURi);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+            //here you can choose quality factor in third parameter(ex. i choosen 25)
+            bmp.compress(Bitmap.CompressFormat.JPEG, 15, baos);
+            fileInBytes = baos.toByteArray();
             Picasso.get().load(mImageURi).into(imageView);
         }
     }

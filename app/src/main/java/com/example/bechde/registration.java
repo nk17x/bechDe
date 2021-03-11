@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -16,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,6 +33,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
 public class registration extends AppCompatActivity {
     Button button,login;
     TextView textView2;
@@ -38,6 +44,7 @@ public class registration extends AppCompatActivity {
     FirebaseDatabase rootNode;
     DatabaseReference databaseReference;
     boolean registerstatus=true;
+    byte[] fileInBytes;
     String email,password,phone,fullname;
     String username;
     UserHelperClass helperClass;
@@ -113,15 +120,16 @@ public class registration extends AppCompatActivity {
                                 if (mImageURi != null) {
                                     mAuth.signInWithEmailAndPassword(email,password);
                                     fileReference = storageReference.child(username+ "." + getFileExtension(mImageURi).toString());
-                                    fileReference.putFile(mImageURi).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    fileReference.putBytes(fileInBytes).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                         @Override
                                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                             fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                                 @Override
                                                 public void onSuccess(Uri uri) {
                                                     String imgurl = uri.toString();
-                                                    helperClass= new UserHelperClass(fullname,phone,email,username,imgurl);
-                                                    databaseReference.child(username).setValue(helperClass);
+                                                    String uid=mAuth.getUid();
+                                                    helperClass= new UserHelperClass(fullname,phone,email,uid,imgurl);
+                                                    databaseReference.child(uid).setValue(helperClass);
                                                 }
                                             });
                                             Toast.makeText(registration.this, "new ad added Succesfully", Toast.LENGTH_SHORT).show();
@@ -184,7 +192,19 @@ public class registration extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             mImageURi = data.getData();
-            Picasso.get().load(mImageURi).into(imageprofile);
+            Bitmap bmp = null;
+            try {
+                bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), mImageURi);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+            //here you can choose quality factor in third parameter(ex. i choosen 25)
+            bmp.compress(Bitmap.CompressFormat.JPEG, 15, baos);
+            fileInBytes = baos.toByteArray();
+
+            Glide.with(imageprofile).load(mImageURi).fitCenter().circleCrop().into(imageprofile);
         }
     }
     }
