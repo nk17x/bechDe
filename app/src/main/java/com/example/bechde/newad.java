@@ -28,6 +28,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -288,8 +289,10 @@ public class newad extends AppCompatActivity implements AdapterView.OnItemSelect
             //here you can choose quality factor in third parameter(ex. i choosen 25)
             bmp.compress(Bitmap.CompressFormat.JPEG, 15, baos);
             fileInBytes = baos.toByteArray();
-            Picasso.get().load(mImageURi).into(imageView);
+
+            Glide.with(imageView).load(mImageURi).fitCenter().into(imageView);
         }
+
     }
     @Override
     public void onBackPressed() {

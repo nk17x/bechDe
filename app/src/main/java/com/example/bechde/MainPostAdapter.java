@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.FirebaseApp;
@@ -30,7 +31,8 @@ Context context;
         holder.adtitle.setText(model.getAdtitle().toUpperCase());
         holder.desc.setText(model.getDesc());
         holder.location.setText(model.getLocation().toUpperCase());
-        Picasso.get().load(model.getImgurl()).into(holder.adimage);
+        Glide.with(holder.adimage).load(model.getImgurl()).centerCrop().into(holder.adimage);
+
     }
 
     @NonNull
@@ -55,13 +57,11 @@ Context context;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    /*nt itemPosition = getLayoutPosition();
+                    int itemPosition = getLayoutPosition();
                     String selected =getRef(itemPosition).getKey();
-                    Intent intent=new Intent(context,bookAppointment.class);
-                    intent.putExtra("selectedDoctor",selected);
-                    intent.putExtra("speciality","doctors/Gastrology");
-                    context.startActivity(intent);*/
-                    Toast.makeText(context, "ad pressed", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(context,showad.class);
+                    intent.putExtra("selectedadkey",selected);
+                    context.startActivity(intent);
 
         }
     });}}

@@ -97,16 +97,17 @@ public class account extends AppCompatActivity {
             }
         });
         firebaseDatabase=FirebaseDatabase.getInstance();
-        databaseReference=FirebaseDatabase.getInstance().getReference("users");
-        Query userdetails2 = databaseReference.orderByChild("username").equalTo(username);
+        String suid = mAuth.getUid();
+        databaseReference=FirebaseDatabase.getInstance().getReference("users/");
+        Query userdetails2 = databaseReference.child(suid);
         userdetails2.addListenerForSingleValueEvent(new ValueEventListener(){
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    String fullnameFromDb=dataSnapshot.child(username).child("fullname").getValue(String.class);
-                    String phoneFromDb=dataSnapshot.child(username).child("phone").getValue(String.class);
-                    String emailFromDb=dataSnapshot.child(username).child("email").getValue(String.class);
-                    String imgurlfromdb=dataSnapshot.child(username).child("imgurl").getValue(String.class);
+                    String fullnameFromDb=dataSnapshot.child("fullname").getValue(String.class);
+                    String phoneFromDb=dataSnapshot.child("phone").getValue(String.class);
+                    String emailFromDb=dataSnapshot.child("email").getValue(String.class);
+                    String imgurlfromdb=dataSnapshot.child("imgurl").getValue(String.class);
                     emailtext.setText(emailFromDb);
                     namestext.setText(fullnameFromDb);
                     mobiletext.setText(phoneFromDb);
@@ -219,8 +220,9 @@ public class account extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             String imgurl = uri.toString();
-                            UserHelperClass helperClass= new UserHelperClass(protfullname,protphone,protemail,username,imgurl);
-                            databaseReference.child(username).setValue(helperClass);
+                            String uid = mAuth.getUid();
+                            UserHelperClass helperClass= new UserHelperClass(protfullname,protphone,protemail,uid,imgurl);
+                            databaseReference.child(uid).setValue(helperClass);
                         }
                     });
                     Toast.makeText(account.this, "new ad added Succesfully", Toast.LENGTH_SHORT).show();

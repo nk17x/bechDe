@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bechde">
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
         android:icon="@drawable/bechde"
@@ -9,7 +10,8 @@
         android:roundIcon="@mipmap/bechde"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".account"></activity>
+        <activity android:name=".showad"></activity>
+        <activity android:name=".account" />
         <activity android:name=".myad" />
         <activity android:name=".newad" />
         <activity android:name=".splashScreen">
@@ -26,6 +28,8 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
     </application>
 
 </manifest>

@@ -12,7 +12,7 @@
         <ImageView
             android:id="@+id/adimage"
             android:layout_width="0dp"
-            android:layout_height="163dp"
+            android:layout_height="240dp"
             android:background="#00FFFFFF"
             android:padding="6dp"
             android:scaleType="fitXY"
