@@ -27,7 +27,7 @@ Context context;
 
     @Override
     protected void onBindViewHolder(@NonNull PostViewHolder holder, int position, @NonNull mainpost model) {
-        holder.price.setText("Rs."+model.getPrice());
+        holder.price.setText("₹ "+model.getPrice().format("%,d",Integer.parseInt(model.getPrice())));
         holder.adtitle.setText(model.getAdtitle().toUpperCase());
         holder.desc.setText(model.getDesc());
         holder.location.setText(model.getLocation().toUpperCase());

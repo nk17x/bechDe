@@ -29,7 +29,7 @@ String selectedadkey;
     FirebaseDatabase rootNode;
     DatabaseReference databaseReference,databaseReference2;
     Toolbar toolbar;
-    TextView adprice,addesc,adsubject,adloc,adusername,aduserprofile,adcategory,adhowold;
+    TextView adprice,addesc,adsubject,adloc,adusername,aduserprofile,adhowold;
     ImageView adimg,userimg;
     Button button4;
     UserHelperClass userHelperClass;
@@ -47,7 +47,6 @@ String selectedadkey;
         adloc=findViewById(R.id.adloc);
         adusername=findViewById(R.id.adusername);
         aduserprofile=findViewById(R.id.aduserprofile);
-        adcategory=findViewById(R.id.adcategory);
         adhowold=findViewById(R.id.adhowold);
         userimg=findViewById(R.id.userimg);
         adimg=findViewById(R.id.adimg);
@@ -100,29 +99,30 @@ String selectedadkey;
                             if(snapshot.exists()){
                                 String fullnameFromDb = snapshot.child("fullname").getValue(String.class);
                                 String userimgurlFromDb = snapshot.child("imgurl").getValue(String.class);
-                    adusername.setText(fullnameFromDb);
+                    adusername.setText(fullnameFromDb.toUpperCase());
                                 new Handler().postDelayed(new Runnable() {
                                     public void run() {
-                                        Glide.with(userimg).load(userimgurlFromDb).fitCenter().into(userimg);
+                                        Glide.with(userimg).load(userimgurlFromDb).fitCenter().circleCrop().into(userimg);
                                     }
-                                }, 300);
+                                }, 150);
                             } }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
                         }
                     });
-                    adsubject.setText(adtitleFromDb);
-                    adcategory.setText(categoryFromDb);
-                    adloc.setText(locationFromDb);
-                    addesc.setText(descFromDb);
-                    adhowold.setText(howoldFromDb);
+                    adprice.setText("₹ "+priceFromDb.format("%,d",Integer.parseInt(priceFromDb)));
+                    adsubject.setText(adtitleFromDb.toUpperCase());
+                   /* adcategory.setText("Catergory :"+categoryFromDb.toUpperCase());*/
+                    adloc.setText(locationFromDb.toUpperCase());
+                    addesc.setText(descFromDb.toUpperCase());
+                    adhowold.setText(howoldFromDb.toUpperCase());
 
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
                             Glide.with(adimg).load(imgurlFromDb).fitCenter().into(adimg);
                         }
-                    }, 300);
+                    }, 150);
 
 
 
