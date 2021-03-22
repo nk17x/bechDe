@@ -32,6 +32,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -73,7 +75,9 @@ public class registration extends AppCompatActivity {
         imageprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFileChooser();
+                CropImage.activity()
+                        .setGuidelines(CropImageView.Guidelines.ON)
+                        .start(registration.this);
             }
         });
         button.setOnClickListener(new View.OnClickListener() {
@@ -120,7 +124,7 @@ public class registration extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful() ) {
                                     mAuth.signInWithEmailAndPassword(email, password);
-                                    fileReference = storageReference.child(username + "." + getFileExtension(mImageURi).toString());
+                                    fileReference = storageReference.child(username + "." + getFileExtension(mImageURi));
                                     fileReference.putBytes(fileInBytes).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                         @Override
                                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -172,12 +176,12 @@ public class registration extends AppCompatActivity {
         imageprofile = findViewById(R.id.imageregister);
     }
 
-    private void openFileChooser() {
+   /* private void openFileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
-    }
+    }*/
 
     private String getFileExtension(Uri uri) {
         ContentResolver cR = getContentResolver();
@@ -188,8 +192,13 @@ public class registration extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            mImageURi = data.getData();
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                mImageURi = result.getUri();
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+            }
             Bitmap bmp = null;
             try {
                 bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), mImageURi);
@@ -204,5 +213,6 @@ public class registration extends AppCompatActivity {
 
             Glide.with(imageprofile).load(mImageURi).fitCenter().circleCrop().into(imageprofile);
         }
+        }
     }
-}
+
