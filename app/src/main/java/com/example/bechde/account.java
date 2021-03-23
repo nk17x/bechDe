@@ -185,7 +185,9 @@ public class account extends AppCompatActivity {
         chatbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(account.this, "new ad pressed", Toast.LENGTH_SHORT).show();
+                Intent i2 =new Intent(account.this,chatting.class);
+                startActivity(i2);
+                finish();
             }
         });
 

@@ -17,10 +17,9 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class myad extends AppCompatActivity {
-   
-    private RecyclerView recyclermyad;
-    private MyAdPostAdapter adapter;
+public class chatting extends AppCompatActivity {
+    private RecyclerView recyclerchatting;
+    private chattingPostAdapter adapter;
     Toolbar toolbar;
     FirebaseAuth mAuth;
     Context context;
@@ -28,45 +27,52 @@ public class myad extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_myad);
-        getWindow().setNavigationBarColor(getResources().getColor(R.color.colorAccent2));
-        getWindow().setStatusBarColor(getResources().getColor(R.color.colorAccent5));
+        setContentView(R.layout.activity_chatting);
         homebutton=findViewById(R.id.homebutton);
         chatbutton=findViewById(R.id.chatbutton);
         accountbutton=findViewById(R.id.accountbutton);
         adbutton=findViewById(R.id.adbutton);
         newadbutton=findViewById(R.id.newadbutton);
         mAuth=FirebaseAuth.getInstance();
-        toolbar=findViewById(R.id.toolbar);
+        toolbar=findViewById(R.id.toolbarchat);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i2 =new Intent(myad.this,MainActivity.class);
+                Intent i2 =new Intent(chatting.this,MainActivity.class);
                 startActivity(i2);
                 finish();
             }
         });
-
-        recyclermyad=findViewById(R.id.recyclermyad);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,2, LinearLayoutManager.VERTICAL,false);
-        recyclermyad.setLayoutManager(mLayoutManager);
-        String userId=mAuth.getUid();
-        /*recyclermyad.setLayoutManager(new LinearLayoutManager(this));*/
-
-        FirebaseRecyclerOptions<mainpost> options =
-                new FirebaseRecyclerOptions.Builder<mainpost>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("ad").orderByChild("userId").equalTo(userId), mainpost.class)
+       /* recyclerchatting=findViewById(R.id.recyclerchatting);
+        recyclerchatting.setLayoutManager(new LinearLayoutManager(this));
+        String uid=mAuth.getUid();
+        Toast.makeText(chatting.this, "this is it"+uid, Toast.LENGTH_SHORT).show();
+        FirebaseRecyclerOptions<chattingpost> options =
+                new FirebaseRecyclerOptions.Builder<chattingpost>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("chat/"+"chatid/"+uid).child("DKG3dODV8wW4TQPByTGG0n6DvOE3svamm9Faz2ZJ8JwJbzwGJLNE08U2"), chattingpost.class)
                         .build();
 
-        adapter=new MyAdPostAdapter(options,this);
-        recyclermyad.setAdapter(adapter);
+        adapter=new chattingPostAdapter(options,chatting.this);
+        recyclerchatting.setAdapter(adapter);*/
+
+        recyclerchatting=findViewById(R.id.recyclerchatting);
+        String userId=mAuth.getUid();
+        recyclerchatting.setLayoutManager(new LinearLayoutManager(this));
+
+        FirebaseRecyclerOptions<chattingpost> options =
+                new FirebaseRecyclerOptions.Builder<chattingpost>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("chat/chatid/"+userId+"/"), chattingpost.class)
+                        .build();
+
+        adapter=new chattingPostAdapter(options,chatting.this);
+        recyclerchatting.setAdapter(adapter);
 
         newadbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i2 =new Intent(myad.this,newad.class);
+                Intent i2 =new Intent(chatting.this,newad.class);
                 startActivity(i2);
                 finish();
             }
@@ -75,7 +81,7 @@ public class myad extends AppCompatActivity {
         adbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i2 =new Intent(myad.this,myad.class);
+                Intent i2 =new Intent(chatting.this,myad.class);
                 startActivity(i2);
                 finish();
             }
@@ -84,8 +90,8 @@ public class myad extends AppCompatActivity {
         chatbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i2 =new Intent(myad.this,chatting.class);
-                startActivity(i2);
+                Intent intenta=new Intent(chatting.this,chatting.class);
+                startActivity(intenta);
                 finish();
             }
         });
@@ -93,7 +99,7 @@ public class myad extends AppCompatActivity {
         accountbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intenta=new Intent(myad.this,account.class);
+                Intent intenta=new Intent(chatting.this,account.class);
                 startActivity(intenta);
                 finish();
             }
@@ -102,12 +108,12 @@ public class myad extends AppCompatActivity {
         homebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i2 =new Intent(myad.this,MainActivity.class);
+                Intent i2 =new Intent(chatting.this,MainActivity.class);
                 startActivity(i2);
                 finish();
             }
         });
-    }
+}
     @Override
     protected void onStart() {
         super.onStart();
@@ -117,13 +123,5 @@ public class myad extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         adapter.stopListening();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent i2 =new Intent(myad.this,MainActivity.class);
-        startActivity(i2);
-        finish();
     }
 }

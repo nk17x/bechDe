@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(this);
+
         recyclermain=findViewById(R.id.recyclermain);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,2,LinearLayoutManager.VERTICAL,false);
         recyclermain.setLayoutManager(mLayoutManager);
@@ -94,7 +95,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         chatbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "new ad pressed", Toast.LENGTH_SHORT).show();
+                Intent i2 =new Intent(MainActivity.this,chatting.class);
+                startActivity(i2);
+                finish();
             }
         });
 
@@ -138,7 +141,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface arg0, int arg1) {
-                            mAuth.signOut();
                             MainActivity.super.onBackPressed();
                         }
                     }).create().show();
