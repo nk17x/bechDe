@@ -89,6 +89,14 @@ public class showad extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        aduserprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(showad.this,profileView.class);
+                intent.putExtra("fcuid1",fcuid1);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

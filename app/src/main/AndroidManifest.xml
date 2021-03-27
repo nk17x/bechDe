@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/bechde"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".chat"></activity>
+        <activity android:name=".profileView"></activity>
+        <activity android:name=".chat" />
         <activity android:name=".chatting" />
         <activity android:name=".showad" />
         <activity android:name=".account" />

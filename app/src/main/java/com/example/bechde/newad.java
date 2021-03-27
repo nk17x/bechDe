@@ -15,6 +15,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
@@ -167,6 +168,22 @@ public class newad extends AppCompatActivity implements AdapterView.OnItemSelect
                 location=locationtext.getText().toString();
                 desc=desctext.getText().toString();
                 price=pricetext.getText().toString();
+                if (TextUtils.isEmpty(adtitle)) {
+                    adtitletext.setError("Enter valid Ad Title!");
+                    return;
+                }
+                if (TextUtils.isEmpty(price)) {
+                    pricetext.setError("Enter price!");
+                    return;
+                }
+                if (TextUtils.isEmpty(location)) {
+                    locationtext.setError("Enter location!");
+                    return;
+                }
+                if (TextUtils.isEmpty(desc)) {
+                    desctext.setError("Enter Description!");
+                    return;
+                }
                 storageReference = FirebaseStorage.getInstance().getReference("ad/" + category);
                 databaseReference = FirebaseDatabase.getInstance().getReference("ad/");
                 uploadFile();
