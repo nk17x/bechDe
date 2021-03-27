@@ -14,6 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.FitCenter;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,7 +40,7 @@ public class showad extends AppCompatActivity {
     adhelperclass adhelperclass;
     String chatsid,fcuid1, fcuid2, fcimgurl1, fcimgurl2, fcname1, fcname2;
     MessageHelperClass messageHelperClass;
-    String imgurl1;
+    String imgurl1,adtitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,12 +78,14 @@ public class showad extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 databaseReference = rootNode.getReference("chat/");
-                newChatHelperClass2 = new NewChatHelperClass(chatsid,fcuid1, fcuid2, fcimgurl1, fcimgurl2, fcname1, fcname2,imgurl1);
-                newChatHelperClass1 = new NewChatHelperClass(chatsid, fcuid2,fcuid1, fcimgurl2, fcimgurl1, fcname2, fcname1,imgurl1);
+                newChatHelperClass2 = new NewChatHelperClass(chatsid,fcuid1, fcuid2, fcimgurl1, fcimgurl2, fcname1, fcname2,imgurl1,adtitle);
+                newChatHelperClass1 = new NewChatHelperClass(chatsid, fcuid2,fcuid1, fcimgurl2, fcimgurl1, fcname2, fcname1,imgurl1,adtitle);
                 databaseReference.child("chatid/").child(fcuid1).child(fcuid1+fcuid2).setValue(newChatHelperClass1);
                 databaseReference.child("chatid/").child(fcuid2).child(fcuid1+fcuid2).setValue(newChatHelperClass2);
                 Intent intent=new Intent(showad.this,chat.class);
                 intent.putExtra("fccuid",fcuid1+fcuid2);
+                intent.putExtra("aduname",fcname1);
+                intent.putExtra("aduimgurl",fcimgurl1);
                 startActivity(intent);
             }
         });
@@ -88,7 +94,6 @@ public class showad extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         databaseReference = FirebaseDatabase.getInstance().getReference();
         Query addetails = databaseReference.child("ad/" + selectedadkey);
         addetails.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -105,6 +110,7 @@ public class showad extends AppCompatActivity {
                     String useridFromDb = dataSnapshot.child("userId").getValue(String.class);
                     String username = useridFromDb.toString();
                     imgurl1=imgurlFromDb;
+                    adtitle=adtitleFromDb;
                     fcuid1 = username;
                     databaseReference2 = FirebaseDatabase.getInstance().getReference();
                     Query userdetails5 = databaseReference2.child("users/" + username);
@@ -161,7 +167,9 @@ public class showad extends AppCompatActivity {
 
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
-                            Glide.with(adimg).load(imgurlFromDb).fitCenter().into(adimg);
+                            Glide.with(adimg).load(imgurlFromDb)
+                                    .transform(new FitCenter(),new RoundedCorners(22))
+                                    .into(adimg);
                         }
                     }, 150);
 

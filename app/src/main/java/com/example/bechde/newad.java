@@ -29,6 +29,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.FitCenter;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -302,7 +304,9 @@ public class newad extends AppCompatActivity implements AdapterView.OnItemSelect
             bmp.compress(Bitmap.CompressFormat.JPEG, 15, baos);
             fileInBytes = baos.toByteArray();
 
-            Glide.with(imageView).load(mImageURi).fitCenter().into(imageView);
+            Glide.with(imageView).load(mImageURi)
+                    .transform(new FitCenter(),new RoundedCorners(20))
+                    .into(imageView);
         }
 
     }

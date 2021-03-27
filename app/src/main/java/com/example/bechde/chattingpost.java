@@ -2,7 +2,7 @@ package com.example.bechde;
 
 public class chattingpost {
 
-    String chatsid,fcuid1, fcuid2, fcimgurl1, fcimgurl2, fcname1, fcname2,imgurl;
+    String chatsid,fcuid1, fcuid2, fcimgurl1, fcimgurl2, fcname1, fcname2,imgurl,adtitle;
 
     public String getChatsid() {
         return chatsid;
@@ -66,6 +66,14 @@ public class chattingpost {
 
     public void setImgurl(String imgurl) {
         this.imgurl = imgurl;
+    }
+
+    public String getAdtitle() {
+        return adtitle;
+    }
+
+    public void setAdtitle(String adtitle) {
+        this.adtitle = adtitle;
     }
 
     public chattingpost() {

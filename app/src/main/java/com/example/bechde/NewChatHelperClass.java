@@ -1,7 +1,7 @@
 package com.example.bechde;
 
 public class NewChatHelperClass {
-    String chatsid,fcuid1, fcuid2, fcimgurl1, fcimgurl2, fcname1, fcname2,imgurl;
+    String chatsid,fcuid1, fcuid2, fcimgurl1, fcimgurl2, fcname1, fcname2,imgurl,adtitle;
 
     @Override
     public String toString() {
@@ -14,6 +14,7 @@ public class NewChatHelperClass {
                 ", fcname1='" + fcname1 + '\'' +
                 ", fcname2='" + fcname2 + '\'' +
                 ", imgurl='" + imgurl + '\'' +
+                ", adtitle='" + adtitle + '\'' +
                 '}';
     }
 
@@ -81,7 +82,15 @@ public class NewChatHelperClass {
         this.imgurl = imgurl;
     }
 
-    public NewChatHelperClass(String chatsid, String fcuid1, String fcuid2, String fcimgurl1, String fcimgurl2, String fcname1, String fcname2, String imgurl) {
+    public String getAdtitle() {
+        return adtitle;
+    }
+
+    public void setAdtitle(String adtitle) {
+        this.adtitle = adtitle;
+    }
+
+    public NewChatHelperClass(String chatsid, String fcuid1, String fcuid2, String fcimgurl1, String fcimgurl2, String fcname1, String fcname2, String imgurl, String adtitle) {
         this.chatsid = chatsid;
         this.fcuid1 = fcuid1;
         this.fcuid2 = fcuid2;
@@ -90,7 +99,10 @@ public class NewChatHelperClass {
         this.fcname1 = fcname1;
         this.fcname2 = fcname2;
         this.imgurl = imgurl;
+        this.adtitle = adtitle;
     }
+
+
 
     public NewChatHelperClass() {
     }

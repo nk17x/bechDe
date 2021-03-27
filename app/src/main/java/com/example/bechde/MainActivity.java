@@ -170,9 +170,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 finish();
                 break;
             case R.id.navchats:
-               /* Intent intentmedicalrecords=new Intent(MainActivity.this,lab_reports.class);
+                Intent intentmedicalrecords=new Intent(MainActivity.this,chatting.class);
                 startActivity(intentmedicalrecords);
-                break;*/
+                break;
             case R.id.navaccount:
                 Intent intenta=new Intent(MainActivity.this,account.class);
                 startActivity(intenta);

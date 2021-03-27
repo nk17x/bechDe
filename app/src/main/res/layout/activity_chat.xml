@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     tools:context=".chat">
 
 
@@ -29,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="120dp"
             android:layout_marginTop="10dp"
-            android:text="Ronaldo Shaikh"
+            android:text='" "'
             android:textSize="21sp"
             android:textStyle="bold" />
 

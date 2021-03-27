@@ -13,6 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.FitCenter;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.FirebaseApp;
@@ -31,7 +35,9 @@ Context context;
         holder.adtitle.setText(model.getAdtitle().toUpperCase());
         holder.desc.setText(model.getDesc());
         holder.location.setText(model.getLocation().toUpperCase());
-        Glide.with(holder.adimage).load(model.getImgurl()).centerCrop().into(holder.adimage);
+        RequestOptions options = new RequestOptions();
+        options.transform(new CenterCrop(),new RoundedCorners(15));
+        Glide.with(holder.adimage).load(model.getImgurl()).apply(options).into(holder.adimage);
 
     }
 
