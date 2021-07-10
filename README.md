@@ -20,6 +20,25 @@ Download here -[BechDe](https://github.com/nk17x/BechDe/raw/master/BechDe.apk)
 ![image](https://user-images.githubusercontent.com/53692724/125168504-7bfd4400-e1c3-11eb-9e8e-f12b28637f1d.png)
 ![image](https://user-images.githubusercontent.com/53692724/125168518-89b2c980-e1c3-11eb-8cf4-5d5af04dc441.png)
 
+## System Design
+### Use Case Diagram
+ 
+![image](https://user-images.githubusercontent.com/53692724/125169103-5291e780-e1c6-11eb-8318-dd86d8dcd3da.png)
+
+### Sequence Diagram
+
+![image](https://user-images.githubusercontent.com/53692724/125169107-56be0500-e1c6-11eb-8562-f1c2805f4a65.png)
+### Object Diagram User
+
+![image](https://user-images.githubusercontent.com/53692724/125169109-59b8f580-e1c6-11eb-90f6-9ddea66e43f4.png)
+### Object Diagram seller
+
+![image](https://user-images.githubusercontent.com/53692724/125169112-5c1b4f80-e1c6-11eb-9ba4-9ff8eef4b545.png)
+### State Diagram
+
+![image](https://user-images.githubusercontent.com/53692724/125169117-5f164000-e1c6-11eb-8589-7b80e24a7b1c.png)
+
+
 ## Built With
 
 * [Android Studio](https://developer.android.com/studio) - IDE
