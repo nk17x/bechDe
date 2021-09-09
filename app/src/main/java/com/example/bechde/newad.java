@@ -16,6 +16,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
@@ -49,6 +50,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.util.Log.println;
 
 public class newad extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     Spinner howoldspinner, categoryspinner;
@@ -306,24 +309,26 @@ public class newad extends AppCompatActivity implements AdapterView.OnItemSelect
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 mImageURi = result.getUri();
+                Bitmap bmp = null;
+                try {
+                    bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), mImageURi);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+                //here you can choose quality factor in third parameter(ex. i choosen 25)
+                bmp.compress(Bitmap.CompressFormat.JPEG, 15, baos);
+                fileInBytes = baos.toByteArray();
+
+                Glide.with(imageView).load(mImageURi)
+                        .transform(new FitCenter(),new RoundedCorners(20))
+                        .into(imageView);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
-            Bitmap bmp = null;
-            try {
-                bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), mImageURi);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-            //here you can choose quality factor in third parameter(ex. i choosen 25)
-            bmp.compress(Bitmap.CompressFormat.JPEG, 15, baos);
-            fileInBytes = baos.toByteArray();
-
-            Glide.with(imageView).load(mImageURi)
-                    .transform(new FitCenter(),new RoundedCorners(20))
-                    .into(imageView);
         }
 
     }

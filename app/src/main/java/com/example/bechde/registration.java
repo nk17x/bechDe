@@ -40,7 +40,7 @@ import java.io.IOException;
 
 public class registration extends AppCompatActivity {
     Button button, login;
-    TextView textView2;
+    TextView textView14;
     TextInputEditText textphoneno, textfullname, textemail, textpassword;
     FirebaseAuth mAuth;
     FirebaseDatabase rootNode;
@@ -75,9 +75,15 @@ public class registration extends AppCompatActivity {
         imageprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CropImage.activity()
+                try {
+                    CropImage.activity()
                         .setGuidelines(CropImageView.Guidelines.ON)
                         .start(registration.this);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                };
+
             }
         });
         button.setOnClickListener(new View.OnClickListener() {
@@ -174,6 +180,7 @@ public class registration extends AppCompatActivity {
         textpassword = findViewById(R.id.password);
         textfullname = findViewById(R.id.fullname);
         imageprofile = findViewById(R.id.imageregister);
+        textView14=findViewById(R.id.textView14);
     }
 
    /* private void openFileChooser() {
@@ -195,23 +202,25 @@ public class registration extends AppCompatActivity {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
+                textView14.setVisibility(View.INVISIBLE);
                 mImageURi = result.getUri();
+                Bitmap bmp = null;
+                try {
+                    bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), mImageURi);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+                //here you can choose quality factor in third parameter(ex. i choosen 25)
+                bmp.compress(Bitmap.CompressFormat.JPEG, 15, baos);
+                fileInBytes = baos.toByteArray();
+
+                Glide.with(imageprofile).load(mImageURi).fitCenter().circleCrop().into(imageprofile);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
-            Bitmap bmp = null;
-            try {
-                bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), mImageURi);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-            //here you can choose quality factor in third parameter(ex. i choosen 25)
-            bmp.compress(Bitmap.CompressFormat.JPEG, 15, baos);
-            fileInBytes = baos.toByteArray();
-
-            Glide.with(imageprofile).load(mImageURi).fitCenter().circleCrop().into(imageprofile);
         }
         }
     }
